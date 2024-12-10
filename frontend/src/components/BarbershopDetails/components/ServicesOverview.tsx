@@ -68,7 +68,7 @@ const ServicesOverview: React.FC<ServicesOverviewProps> = ({ services, onBookMul
       </div>
 
       {selectedServices.length > 0 && (
-        <div className="fixed bottom-6 left-6 right-6 bg-dark rounded-lg p-4 shadow-lg border border-darkGrey/30">
+        <div className="bottom-6 left-6 right-6 bg-dark rounded-lg p-4 shadow-lg border border-darkGrey/30">
           <div className="flex justify-between items-center mb-3">
             <div className="text-lightGrey">
               <div>Selected: {selectedServices.length} services</div>

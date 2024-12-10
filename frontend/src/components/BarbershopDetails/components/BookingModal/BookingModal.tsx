@@ -86,8 +86,9 @@ const BookingModal: React.FC<BookingModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-darkGrey rounded-xl w-full max-w-md mx-4 overflow-hidden">
+    <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-darkGrey rounded-xl w-full max-w-md flex flex-col h-[85vh]">
+        {/* Header */}
         <div className="p-4 border-b border-darkGrey/30">
           <div className="flex items-center justify-between">
             <h3 className="text-white font-medium">Book Appointment</h3>
@@ -100,7 +101,8 @@ const BookingModal: React.FC<BookingModalProps> = ({
           </div>
         </div>
 
-        <div className="p-4">
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto">
           {step === 'services' && (
             <ServiceSelector
               services={services}

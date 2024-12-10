@@ -70,6 +70,22 @@ const BarbershopDetails: React.FC<BarbershopDetailsProps> = ({ shopId, onBack, o
       bgColor: 'bg-dark',
       textColor: 'text-lightGrey',
     },
+    {
+      id: '4',
+      name: 'Premium Haircut 2',
+      price: 50,
+      duration: 50,
+      bgColor: 'bg-dark',
+      textColor: 'text-lightGrey',
+    },
+    {
+      id: '5',
+      name: 'Premium Haircut 3',
+      price: 50,
+      duration: 50,
+      bgColor: 'bg-dark',
+      textColor: 'text-lightGrey',
+    },
   ];
 
   const barbersList: Barber[] = [

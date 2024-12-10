@@ -41,42 +41,41 @@ const ServiceSelector: React.FC<ServiceSelectorProps> = ({
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h4 className="text-white text-sm font-medium">Select Services</h4>
-      </div>
-
-      <div className="grid gap-2">
-        {services.map((service) => {
-          const isSelected = selectedServices.some(s => s.id === service.id);
-          return (
-            <button
-              key={service.id}
-              onClick={() => handleServiceToggle(service)}
-              className={`flex items-center justify-between p-3 rounded-lg transition-all ${
-                isSelected ? 'bg-neonYellow text-dark' : 'bg-dark/50 text-white hover:bg-dark/70'
-              }`}
-            >
-              <div className="flex-1">
-                <h5 className="font-medium">{service.name}</h5>
-                <p className="text-sm opacity-80">{service.duration} min</p>
-              </div>
-              <div className="text-right">
-                <p className="font-medium">${service.price}</p>
-              </div>
-            </button>
-          );
-        })}
+    <>
+      <div className="p-4 pb-32">
+        <h4 className="text-white text-sm font-medium mb-4">Select Services</h4>
+        <div className="space-y-2">
+          {services.map((service) => {
+            const isSelected = selectedServices.some(s => s.id === service.id);
+            return (
+              <button
+                key={service.id}
+                onClick={() => handleServiceToggle(service)}
+                className={`flex items-center justify-between p-3 rounded-lg transition-all w-full ${
+                  isSelected ? 'bg-neonYellow text-dark' : 'bg-dark/50 text-white hover:bg-dark/70'
+                }`}
+              >
+                <div className="flex-1">
+                  <h5 className="font-medium">{service.name}</h5>
+                  <p className="text-sm opacity-80">{service.duration} min</p>
+                </div>
+                <div className="text-right">
+                  <p className="font-medium">${service.price}</p>
+                </div>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {selectedServices.length > 0 && (
-        <div className="mt-4 space-y-4">
-          <div className="border-t border-darkGrey/30 pt-4">
+        <div className="fixed bottom-4 left-4 right-4 border border-darkGrey/30 p-4 bg-darkGrey rounded-lg shadow-lg">
+          <div className="space-y-2 mb-4">
             <div className="flex justify-between text-white">
               <span>Total Duration:</span>
               <span>{totalDuration} min</span>
             </div>
-            <div className="flex justify-between text-neonYellow font-medium mt-1">
+            <div className="flex justify-between text-neonYellow font-medium">
               <span>Total Price:</span>
               <span>${totalPrice}</span>
             </div>
@@ -90,7 +89,7 @@ const ServiceSelector: React.FC<ServiceSelectorProps> = ({
           </button>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

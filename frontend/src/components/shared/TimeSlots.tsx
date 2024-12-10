@@ -7,7 +7,7 @@ interface TimeSlotsProps {
   showLabel?: boolean;
 }
 
-const TimeSlots: React.FC<TimeSlotsProps> = ({ 
+const   TimeSlots: React.FC<TimeSlotsProps> = ({ 
   slots, 
   maxSlots = 3,
   showLabel = true
