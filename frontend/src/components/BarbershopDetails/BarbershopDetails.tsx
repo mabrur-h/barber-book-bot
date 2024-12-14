@@ -239,6 +239,7 @@ const BarbershopDetails: React.FC<BarbershopDetailsProps> = ({ shopId, onBack, o
                       barber={barbersList[0]} 
                       onClick={() => {
                         setSelectedBarber(barbersList[0]);
+                        setBookingFlow('fromBarber');
                         setIsBookingModalOpen(true);
                       }}
                     />

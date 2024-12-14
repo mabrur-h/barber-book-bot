@@ -17,7 +17,7 @@ const BarberSelector: React.FC<BarberSelectorProps> = ({
   const totalPrice = selectedServices.reduce((sum, service) => sum + service.price, 0);
 
   return (
-    <div className="space-y-4">
+    <div className="p-6 space-y-4">
       <div className="flex items-center justify-between">
         <h4 className="text-white text-sm font-medium">Select Barber</h4>
         <button 

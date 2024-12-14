@@ -74,7 +74,7 @@ const TimeSlotSelector: React.FC<TimeSlotSelectorProps> = ({
   const hasNoSlots = Object.keys(groupedSlots).length === 0;
 
   return (
-    <div className="space-y-4">
+    <div className="p-6 space-y-4">
       <div className="flex items-center justify-between">
         <h4 className="text-white text-sm font-medium">Select Time</h4>
         <button 

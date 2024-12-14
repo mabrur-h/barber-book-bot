@@ -4,6 +4,7 @@ import TimeSlotSelector from './TimeSlotSelector';
 import ServiceSelector from './ServiceSelector';
 import BarberSelector from './BarberSelector';
 import ModalHeader from './ModalHeader';
+import BookingSystem from '../../../Booking/BookingSystem';
 
 interface BookingModalProps {
   barbers: Barber[];
@@ -25,7 +26,7 @@ const BookingModal: React.FC<BookingModalProps> = ({
   onBook,
 }) => {
   // Set initial step based on the flow
-  const [step, setStep] = React.useState<'services' | 'barber' | 'time'>(
+  const [step, setStep] = React.useState<'services' | 'barber' | 'time' | 'confirm'>(
     flow === 'fromBarber' ? 'services' : 'barber'
   );
   const [selectedServices, setSelectedServices] = React.useState<Service[]>(initialServices || []);
@@ -59,10 +60,14 @@ const BookingModal: React.FC<BookingModalProps> = ({
 
   const handleTimeSelect = (datetime: string) => {
     setSelectedSlot(datetime);
+    setStep('confirm');
   };
 
   const handleBack = () => {
-    if (step === 'time') {
+    if (step === 'confirm') {
+      setStep('time');
+      setSelectedSlot(null);
+    } else if (step === 'time') {
       if (flow === 'fromBarber') {
         setStep('services');
       } else {
@@ -79,15 +84,13 @@ const BookingModal: React.FC<BookingModalProps> = ({
 
   const handleBook = () => {
     if (!selectedBarber || !selectedSlot || selectedServices.length === 0) return;
-    
-    // Here you would typically make an API call to book the appointment
     onBook();
     handleClose();
   };
 
   return (
     <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-darkGrey rounded-xl w-full max-w-md flex flex-col h-[85vh]">
+      <div className="bg-darkGrey rounded-xl w-full max-w-md flex flex-col h-[85vh] overflow-hidden">
         {/* Header */}
         <div className="p-4 border-b border-darkGrey/30">
           <div className="flex items-center justify-between">
@@ -102,17 +105,17 @@ const BookingModal: React.FC<BookingModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto custom-scrollbar">
           {step === 'services' && (
             <ServiceSelector
               services={services}
-              onSelect={handleServiceSelect}
               selectedServices={selectedServices}
+              onSelect={handleServiceSelect}
               onContinue={handleServiceContinue}
               flow={flow}
             />
           )}
-          
+
           {step === 'barber' && (
             <BarberSelector
               barbers={barbers}
@@ -121,17 +124,30 @@ const BookingModal: React.FC<BookingModalProps> = ({
               onBack={handleBack}
             />
           )}
-          
+
           {step === 'time' && selectedBarber && (
             <TimeSlotSelector
               barber={selectedBarber}
               slots={selectedBarber.nextAvailableSlots}
               selectedServices={selectedServices}
-              onTimeSelect={handleTimeSelect}
               selectedTime={selectedSlot}
+              onTimeSelect={handleTimeSelect}
               onBack={handleBack}
-              onBook={handleBook}
+              onBook={() => setStep('confirm')}
             />
+          )}
+
+          {step === 'confirm' && selectedBarber && selectedSlot && (
+            <div className="h-full overflow-y-auto">
+              <BookingSystem
+                shopId="1"
+                selectedServices={selectedServices}
+                selectedBarber={selectedBarber.name}
+                selectedDate={selectedSlot.split('T')[0]}
+                selectedTime={selectedSlot.split('T')[1].slice(0, 5)}
+                onBack={handleBack}
+              />
+            </div>
           )}
         </div>
       </div>

@@ -42,7 +42,7 @@ const ServiceSelector: React.FC<ServiceSelectorProps> = ({
 
   return (
     <>
-      <div className="p-4 pb-32">
+      <div className="p-6 pb-32">
         <h4 className="text-white text-sm font-medium mb-4">Select Services</h4>
         <div className="space-y-2">
           {services.map((service) => {
@@ -69,7 +69,7 @@ const ServiceSelector: React.FC<ServiceSelectorProps> = ({
       </div>
 
       {selectedServices.length > 0 && (
-        <div className="fixed bottom-4 left-4 right-4 border border-darkGrey/30 p-4 bg-darkGrey rounded-lg shadow-lg">
+        <div className="fixed bottom-4 left-4 right-4 border border-darkGrey/30 p-4 bg-darkGrey rounded-lg shadow-lg mx-4">
           <div className="space-y-2 mb-4">
             <div className="flex justify-between text-white">
               <span>Total Duration:</span>

@@ -12,8 +12,8 @@ const ServicesOverview: React.FC<ServicesOverviewProps> = ({ services, onBookMul
 
   const toggleService = (service: Service) => {
     setSelectedServices(prev => 
-      prev.find(s => s.name === service.name)
-        ? prev.filter(s => s.name !== service.name)
+      prev.find(s => s.id === service.id)
+        ? prev.filter(s => s.id !== service.id)
         : [...prev, service]
     );
   };
@@ -30,25 +30,25 @@ const ServicesOverview: React.FC<ServicesOverviewProps> = ({ services, onBookMul
         <div className="space-y-3">
           {services.map((service) => (
             <button
-              key={service.name}
+              key={service.id}
               onClick={() => {
                 toggleService(service);
               }}
               className={`w-full p-4 rounded-lg transition-all duration-200 flex items-center justify-between group ${
-                selectedServices.find(s => s.name === service.name)
+                selectedServices.find(s => s.id === service.id)
                   ? 'bg-neonYellow text-dark'
                   : 'bg-darkGrey/50 text-lightGrey hover:bg-darkGrey'
               }`}
             >
               <div className="flex items-center space-x-3">
-                <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
-                  selectedServices.find(s => s.name === service.name)
-                    ? 'border-dark bg-dark'
+                <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-colors ${
+                  selectedServices.find(s => s.id === service.id)
+                    ? 'border-dark'
                     : 'border-lightGrey group-hover:border-neonYellow'
                 }`}>
-                  {selectedServices.find(s => s.name === service.name) && (
-                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  {selectedServices.find(s => s.id === service.id) && (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   )}
                 </div>
